@@ -1,0 +1,37 @@
+
+spring:
+  application:
+    name: prometheus-example
+management:
+  endpoints:
+    # 关闭所有的检查项
+    enabled-by-default: false
+    web:
+      exposure:
+        # 暴露监控接口，*为全部接口
+        include: 'prometheus'
+      ## 省掉了/actuator前缀
+      base-path: "/actuator"
+  # 对外暴露prometheus接口并显示更多健康信息
+  endpoint:
+    prometheus:
+      enabled: true
+    health:
+      show-details: always
+  ## 关闭内置的检查项
+  metrics:
+    enable:
+      jvm: false
+      logback: false
+      files: false
+      tomcat: false
+      executor: false
+      disk: false
+      uptime: false
+      integration: false
+# 开发环境配置
+server:
+  port: 8081
+logging:
+  level:
+    root: debug

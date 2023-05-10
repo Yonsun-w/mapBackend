@@ -1,0 +1,39 @@
+
+spring:
+  application:
+    name: prometheus-example
+management:
+  endpoints:
+    # 关闭所有的检查项
+    enabled-by-default: false
+    prometheus:
+      exposure:
+        # 暴露监控接口，*为全部接口
+        include: 'prometheus'
+      id: metrics
+    web:
+#      base-path: /DiyPath # 自定义路径地址 这里会指向 /DiyPath/prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+    health:
+      show-details: always
+  metrics:
+    enable:
+      jvm: false
+      logback: false
+      files: false
+      tomcat: false
+      executor: false
+      disk: false
+      uptime: false
+      integration: false
+  tags:
+    application: ${spring.application.name}
+
+# 开发环境配置
+server:
+  port: 8081
+logging:
+  level:
+    root: debug
